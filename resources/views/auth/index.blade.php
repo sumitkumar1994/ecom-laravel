@@ -1,51 +1,17 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Users List</title>
-  <style>
-    table {
-      width: 80%;
-      margin: 30px auto;
-      border-collapse: collapse;
-      font-family: Arial, sans-serif;
-    }
-
-    th,
-    td {
-      border: 1px solid #ccc;
-      padding: 12px 15px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #3498db;
-      color: white;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-
-    h2 {
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
-  </style>
-</head>
-
-<body>
+@extends('layouts.masterLayout')
 
 
-  <h2>Registered Users</h2>
+@section('content')
+  <div class="container mt-5">
+    <h2>Registered Users</h2>
 
-  <table>
+    <table>
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Registered At</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Registered At</th>
       </tr>
     </thead>
     <tbody>
@@ -58,8 +24,6 @@
       </tr>
     @endforeach
     </tbody>
-  </table>
-
-</body>
-
-</html>
+    </table>
+  </div>
+@endsection

@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-// use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
-class MainController extends Controller
+class AuthController extends Controller
 {
-    public function showLoginForm()
+    public function login()
     {
         return view('auth.login');// Your blade file location
     }
@@ -107,4 +105,3 @@ class MainController extends Controller
         return view('pages.contact');
     }
 }
-

@@ -1,0 +1,84 @@
+body {
+    background: linear-gradient(to right, #667eea, #764ba3);
+    /* Cool blue theme */
+    font-family: "Segoe UI", sans-serif;
+}
+
+.navbar {
+    background-color: #764ba3;
+}
+
+.navbar-brand,
+.nav-link,
+.btn {
+    color: white !important;
+}
+
+.hero {
+    background: linear-gradient(to right, #667eea, #764ba3);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-top: 10px;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-card {
+    border: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+/* Dashboard Table Styles */
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    border: 1px solid #e2e8f0;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #667eea;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+tr:hover {
+    background-color: #edf2f7;
+}
