@@ -73,6 +73,7 @@ class MainController extends Controller
         $User = User::create([
             'name' => $request->name,
             'email' => $request->email,
+
             'password' => Hash::make($request->password),
         ]);
         // Redirect to login page with success message 

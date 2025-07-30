@@ -27,12 +27,16 @@ Route::get('/contact', [MainController::class, 'showContact'])->name('contact');
 // admin route45
 Route::prefix('/admin')->group(function () {
   Route::get('/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
-  Route::post('/login', [AdminController::class, 'login'])->name('admin.login.submit');
+  Route::post('/login', [AdminController::class, 'adminlogin'])->name('admin.login.submit');
+  Route::get('/users', [AdminController::class, 'users'])->name('users');
+  Route::get('/users/add', [AdminController::class, 'showAddUserForm'])->name('users.add');
+  Route::post('/users/add', [AdminController::class, 'createUser'])->name('users.create');
+
+
 
   Route::get('/dashboard', function () {
     return view('admin.adminDashboard');
   })->name('admin.dashboard');
-  Route::get('/users', [AdminController::class, 'users'])->name('users');
 
 
 });
