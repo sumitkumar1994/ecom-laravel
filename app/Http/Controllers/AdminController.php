@@ -17,7 +17,10 @@ class AdminController extends Controller
     }
     public function users()
     {
-        return view('admin.users');
+
+        $userData = User::all();     // Fetch all users
+        $userName = 'guest';         // Set user name
+        return view('admin.users', compact('userData', 'userName'));
     }
     public function showAddUserForm()
     {
@@ -34,11 +37,11 @@ class AdminController extends Controller
 
         // Attempt login
         if (Auth::attempt($credentials)) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role != 3) {
                 return redirect()->route('admin.dashboard')->with('success', 'Login successful!');
 
             } else {
-                Auth::logout();
+                // Auth::logout();
                 return redirect()->route('admin.login')->with('error', 'Access denied!');
 
             }
@@ -48,7 +51,7 @@ class AdminController extends Controller
         // Login failed
         return back()->withErrors([
             'email' => 'Invalid email or password.',
-        ])->onlyInput('email');
+        ])->onlyInput('email', 'password');
     }
 
     public function createUser(Request $request)
@@ -68,10 +71,45 @@ class AdminController extends Controller
         ]);
         // Redirect to login page with success message 
         if ($User) {
-            return redirect()->route('users')->with('success', 'Account created successfully! Please login.');
+            return redirect()->route('admin.users')->with('success', 'Account created successfully! Please login.');
 
         }
     }
+    // update user into database
+    public function editUser($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.edituser', compact('user'));
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id, // except this user
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect()->route('admin.users')->with('success', 'User updated successfully!');
+    }
+
+    // delete user 
+
+    public function deleteUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.users')->with('success', 'User deleted successfully!');
+    }
+
+
+
+
 
 
 }

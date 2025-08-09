@@ -57,14 +57,15 @@
             </div>
           </div>
           <div class="ms-3">
-            <h6 class="mb-0">Jhon Doe</h6>
+            <h6 class="mb-0">{{ Auth::user()->name }}</h6>
             <span>Admin</span>
           </div>
         </div>
         <div class="navbar-nav w-100">
           <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link active"><i
               class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-          <a href="{{route('users')  }}" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Users</a>
+          <a href="{{route('admin.users')  }}" class="nav-item nav-link "><i
+              class="fa fa-tachometer-alt me-2"></i>Users</a>
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                 class="fa fa-laptop me-2"></i>Elements</a>
@@ -178,7 +179,7 @@
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               <img class="rounded-circle me-lg-2" src="{{ config('app.url') }}/admin/img/user.jpg" alt=""
                 style="width: 40px; height: 40px;">
-              <span class="d-none d-lg-inline-flex">John Doe</span>
+              <span class="d-none d-lg-inline-flex">{{ Auth::user()->name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
               <a href="#" class="dropdown-item">My Profile</a>
@@ -276,7 +277,7 @@
             style="width: 40px; height: 40px;">
           <div class="w-100 ms-3">
             <div class="d-flex w-100 justify-content-between">
-            <h6 class="mb-0">Jhon Doe</h6>
+            <h6 class="mb-0">{{ Auth::user()->name }}</h6>
             <small>15 minutes ago</small>
             </div>
             <span>Short message goes here...</span>
@@ -290,6 +291,7 @@
             <h6 class="mb-0">Jhon Doe</h6>
             <small>15 minutes ago</small>
             </div>
+
             <span>Short message goes here...</span>
           </div>
           </div>

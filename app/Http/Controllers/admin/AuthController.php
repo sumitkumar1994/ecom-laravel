@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -79,13 +81,7 @@ class AuthController extends Controller
 
         }
     }
-    public function dashbordShowForm()
-    {
-        $userData = User::all();
-        $userName = 'guest';
 
-        return view('auth.index', compact('userData', 'userName'));
-    }
 
     // Show Shop page
     public function showShop()
@@ -103,5 +99,12 @@ class AuthController extends Controller
     public function showContact()
     {
         return view('pages.contact');
+    }
+    public function dashbordShowForm()
+    {
+        $userData = user::all();
+        $userName = 'guest';
+
+        return view('auth.index', compact('userData', 'userName'));
     }
 }

@@ -5,7 +5,7 @@
     <div class="col-sm-12 col-xl-4">
     <div class="bg-light rounded h-100 p-4">
       <h6 class="mb-4">Add Users</h6>
-      <form method="post" action="{{ route('users.add') }}">
+      <form method="post" action="{{ route('admin.users.add') }}">
       @csrf
 
       <div class="mb-3">

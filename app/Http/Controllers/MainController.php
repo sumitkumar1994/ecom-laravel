@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Password;
 
 class MainController extends Controller
 {
@@ -107,5 +108,6 @@ class MainController extends Controller
     {
         return view('pages.contact');
     }
-}
 
+
+}

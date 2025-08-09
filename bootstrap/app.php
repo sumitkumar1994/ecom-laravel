@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'guest.redirect' => \App\Http\Middleware\redirectIfAuthenticated::class,
             'auth' => \App\Http\Middleware\customUserAuth::class,
+            'admin' => \App\Http\Middleware\AdminMiddleware::class
 
 
         ]);
