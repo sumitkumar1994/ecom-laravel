@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str; // ✅ Fix: import Str
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Carbon\Carbon;
 
 
 
@@ -31,27 +32,58 @@ class ForgotPasswordController extends Controller
         ], [
             'email.exists' => 'This email is not registered in our system.',
         ]);
+
+        // echo $request ;
+        // die;
         $user = User::where('email', $request->email)->first();
 
-        $token = str::random(60); // Generate a random token
+
+        $token = Str::random(60); // Generate a random token
         DB::table('password_reset_tokens')->where('email', $request->email)->delete();
 
         DB::table('password_reset_tokens')->insert([
             'email' => $request->email,
             'token' => $token,
+            'expires_at' => Carbon::now()->addMinutes(3),
 
             'created_at' => now(),
         ]);
+        // echo $request->email;
+        // die;
 
-        Mail::send('auth.emailLink', ['token' => $token, 'email' => $request->email, 'user' => $user], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Reset Password Notification');
-        });
+        Mail::send(
+            'auth.emailLink',
+            [
+                'token' => $token,
+                'email' => $request->email,
+                'user' => $user,
+                'expires_at' => Carbon::now()->addMinutes(3)->timestamp
+            ],
+            function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject('Reset Password Notification');
+            }
+        );
         return back()->with('status', 'We have emailed your password reset link!');
     }
-    public function showResetForm($token)
+    public function showResetForm(Request $request, $token)
     {
-        return view('auth.resetPassword')->with(['token' => $token, 'email' => request('email')]);
+        $record = DB::table('password_reset_tokens')
+            ->where('token', $token)
+            ->where('email', $request->email)
+            ->first();
+
+        if (!$record) {
+            return redirect()->route('password.request')
+                ->withErrors(['token' => 'Invalid token.']);
+        }
+
+        if (Carbon::parse($record->expires_at)->isPast()) {
+            return redirect()->route('password.request')
+                ->withErrors(['token' => 'Token expired.']);
+        }
+
+        return view('auth.resetPassword')->with(['token' => $token, 'email' => request('email'), 'expires_at' => $record->expires_at]);
     }
     public function resetPassword(Request $request)
     {
@@ -68,6 +100,10 @@ class ForgotPasswordController extends Controller
 
         if (!$tokenData) {
             return back()->withErrors(['email' => 'Invalid token!']);
+        }
+        // Expiry check
+        if (Carbon::parse($tokenData->expires_at)->isPast()) {
+            return back()->withErrors(['token' => 'Token expired!']);
         }
 
         $user = User::where('email', $request->email)->first();

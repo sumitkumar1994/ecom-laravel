@@ -12,6 +12,7 @@
 <body>
 
   <!-- Navbar -->
+  
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" href="/">ShopEase</a>
@@ -33,6 +34,7 @@
 
         <li class="nav-item">
         <form action="{{ route('logout') }}" method="POST" class="d-inline">
+
           @csrf
           <button class="btn btn-sm btn-outline-light text-primary" type="submit">Logout</button>
         </form>
@@ -49,6 +51,12 @@
       </div>
     </div>
   </nav>
+  @if(session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+ @endif
+
 
   @hasSection('content')
     @yield('content')

@@ -5,7 +5,7 @@
     <h2>Welcome Back 👋</h2>
 
     @if($errors->any())
-    <div class="error">{{ $errors->first() }}</div>
+   <p style="color: red">{{ $errors->first() }}</p>
     @endif
 
     <form method="POST" action="{{ route('login.submit') }}">
@@ -20,6 +20,11 @@
     <div class="login-link">
     Don't have an account? <a href="{{ route('register') }}">Sign up here</a>
     </div>
+    @if (session('success'))
+    
+       <p style="color: green">{{ session('success') }}</p>
+    
+    @endif
 
     @if(session('error'))
     <div class="error">{{ session('error') }}</div>

@@ -22,7 +22,8 @@
     }
 
     .login-box {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.6);
+      /* 0.6 = 60% opacity */
       width: 100%;
       max-width: 400px;
       padding: 40px;

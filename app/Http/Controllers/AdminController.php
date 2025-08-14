@@ -107,6 +107,17 @@ class AdminController extends Controller
         return redirect()->route('admin.users')->with('success', 'User deleted successfully!');
     }
 
+    public function adminlogout(Request $request)
+    {
+        Auth::guard('admin')->logout(); // Admin guard ka logout
+
+        $request->session()->invalidate(); // Session ko expire karo
+        $request->session()->regenerateToken(); // CSRF token regenerate karo
+
+        return redirect()->route('admin.login')->with('success', 'Logged out successfully.');
+    }
+
+
 
 
 

@@ -53,7 +53,7 @@
           <div class="position-relative">
             <img class="rounded-circle" src="{{ asset('admin/img/user.jpg') }}" alt=""
               style="width: 40px; height: 40px;">
-            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+            <div class="bg-success rounded-circle border border-white position-absolute end-0 bottom-0 p-1">
             </div>
           </div>
           <div class="ms-3">
@@ -80,13 +80,7 @@
           <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
           <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
           <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                class="far fa-file-alt me-2"></i>Pages</a>
-            <div class="dropdown-menu bg-transparent border-0">
-              <a href="signin.html" class="dropdown-item">Sign In</a>
-              <a href="signup.html" class="dropdown-item">Sign Up</a>
-              <a href="404.html" class="dropdown-item">404 Error</a>
-              <a href="blank.html" class="dropdown-item">Blank Page</a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><iPank Page</a>
             </div>
           </div>
         </div>
@@ -184,7 +178,11 @@
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
               <a href="#" class="dropdown-item">My Profile</a>
               <a href="#" class="dropdown-item">Settings</a>
-              <a href="#" class="dropdown-item">Log Out</a>
+              {{-- <a href="#" class="dropdown-item">Log Out</a> --}}
+              <form action="{{ route('admin.logout') }}" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-danger ms-3">Logout</button>
+              </form>
             </div>
           </div>
         </div>

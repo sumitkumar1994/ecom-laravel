@@ -47,12 +47,14 @@ Route::prefix('admin')->group(function () {
     // Admin user management routes
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/users/add', [AdminController::class, 'showAddUserForm'])->name('admin.users.add');
-    Route::post('/users/add', [AdminController::class, 'createUser'])->name('admin.users.create');
+    Route::post('/users/add', [AdminController::class, 'cre ateUser'])->name('admin.users.create');
     Route::get('/users/{id}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
     Route::post('/users/{id}/update', [AdminController::class, 'updateUser'])->name('admin.users.update');
     Route::delete('/users/{id}/delete', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::post('/logout', [AdminController::class, 'adminlogout'])->name('admin.logout');
 
   });
+  // Password Reset Routes
   Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
   Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 

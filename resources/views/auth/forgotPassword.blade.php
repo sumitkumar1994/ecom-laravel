@@ -13,7 +13,7 @@
 
   <form method="POST" action="{{ route('password.email') }}">
     @csrf
-    <input type="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+    <input type="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" >
     <button type="submit">Send Reset Link</button>
 </form>
 <div class="login-link"><a href="{{ route('login') }}">Back to Login</a></div>

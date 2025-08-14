@@ -20,9 +20,12 @@ class MainController extends Controller
     {
         // Validate login inputs
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email', // email exists check
             'password' => 'required'
-        ]);
+        ], ['email.exists' => 'This email is not registered in our system.']);
+
+        $credentials = $request->only('email', 'password');
+
         // Attempt login
         if (Auth::attempt($credentials)) {
 
@@ -33,25 +36,25 @@ class MainController extends Controller
             'email' => 'Invalid email or password.',
         ])->onlyInput('email');
     }
-    public function loginSubmit(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+    // public function loginSubmit(Request $request)
+    // {
+    //     $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            // Authentication passed
-            return redirect()->intended('index');
-        }
+    //     if (Auth::attempt($credentials)) {
+    //         // Authentication passed
+    //         return redirect()->intended('index');
+    //     }
 
-        // Authentication failed
-        return redirect()->route('login')->with('error', 'Invalid credentials.');
-    }
+    //     // Authentication failed
+    //     return redirect()->route('login')->with('error', 'Invalid credentials.');
+    // }
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('login')->with('status', 'You have been logged out successfully.');
     }
 
 
