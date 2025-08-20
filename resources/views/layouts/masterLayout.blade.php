@@ -6,16 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShopEase - Your Cool eCommerce Store</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
+
 
 <body>
 
   <!-- Navbar -->
-  
+
   <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand" href="/">ShopEase</a>
+      <a class="navbar-brand neon-multi" href="/">ShopEase</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon text-white"></span>
       </button>
@@ -53,9 +56,9 @@
   </nav>
   @if(session('status'))
     <div class="alert alert-success">
-        {{ session('status') }}
+    {{ session('status') }}
     </div>
- @endif
+  @endif
 
 
   @hasSection('content')
@@ -99,6 +102,34 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "timeOut": "4000"
+      };
+
+      @if(session('success'))
+      toastr.success("{{ session('success') }}");
+    @endif
+
+      @if(session('error'))
+      toastr.error("{{ session('error') }}");
+    @endif
+
+      @if(session('info'))
+      toastr.info("{{ session('info') }}");
+    @endif
+
+      @if(session('warning'))
+      toastr.warning("{{ session('warning') }}");
+    @endif
+    });
+  </script>
 </body>
 
 </html>

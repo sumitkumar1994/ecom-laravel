@@ -9,8 +9,7 @@ body {
 }
 
 .navbar-brand,
-.nav-link,
-.btn {
+.nav-link {
     color: white !important;
 }
 
@@ -30,6 +29,45 @@ body {
 .hero p {
     font-size: 1.3rem;
     margin-top: 10px;
+}
+.neon-multi {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff00ff;
+    /* Initial color */
+    animation: neonColor 3s infinite alternate;
+}
+
+@keyframes neonColor {
+    0% {
+        color: #ff00ff;
+        /* Pink */
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+    }
+
+    25% {
+        color: #00ffff;
+        /* Cyan */
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+    }
+
+    50% {
+        color: #00ff00;
+        /* Green */
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00;
+    }
+
+    75% {
+        color: #ffff00;
+        /* Yellow */
+        text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 40px #ffff00;
+    }
+
+    100% {
+        color: #ff0000;
+        /* Red */
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
+    }
 }
 
 @keyframes fadeInDown {

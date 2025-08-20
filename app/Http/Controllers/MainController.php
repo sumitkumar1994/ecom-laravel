@@ -15,6 +15,7 @@ class MainController extends Controller
     {
         return view('auth.login');// Your blade file location
     }
+
     // Handle login submission
     public function loginUser(Request $request)
     {
@@ -35,6 +36,8 @@ class MainController extends Controller
         return back()->withErrors([
             'email' => 'Invalid email or password.',
         ])->onlyInput('email');
+        // return back()->with('error', 'Invalid email or password.')
+        //     ->onlyInput('email');
     }
     // public function loginSubmit(Request $request)
     // {
@@ -50,11 +53,13 @@ class MainController extends Controller
     // }
     public function logout(Request $request)
     {
+
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('status', 'You have been logged out successfully.');
+        return redirect()->route('login')->with('success', 'You have been logged out successfully.');
     }
 
 

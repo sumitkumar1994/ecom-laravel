@@ -19,6 +19,7 @@ Route::middleware(['guest.redirect'])->group(function () {
   Route::post('/register', [MainController::class, 'registerUser'])->name('register.submit');
   Route::get('/login', [MainController::class, 'showLoginForm'])->name('login');
   Route::post('/login', [MainController::class, 'loginUser'])->name('login.submit');
+  Route::post('/notification/{type}', [MainController::class, 'notification'])->name('notification');
 
 
 
